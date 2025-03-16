@@ -19,6 +19,10 @@
   "javascript": {
     "formatter": {
       "semicolons": "always"
+    },
+    "parser": {
+      // https://github.com/biomejs/biome/issues/2261
+      "unsafeParameterDecoratorsEnabled": true
     }
   }
 }

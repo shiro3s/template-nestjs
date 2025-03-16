@@ -1,11 +1,12 @@
-import { Injectable } from '@nestjs/common';
-import {TodosRepository} from "./todos.repository"
+import { Injectable } from "@nestjs/common";
+import { TodosRepository } from "./todos.repository";
+import { FindTodosDto } from "./dto/todos.dto";
 
 @Injectable()
 export class TodosService {
-  constructor(private readonly todosRepository: TodosRepository) {}
+	constructor(private readonly todosRepository: TodosRepository) {}
 
-  findAll(): Promise<string> {
-    return this.todosRepository.findAll();
-  }
+	findAll(cond: FindTodosDto) {
+		return this.todosRepository.findAll(cond);
+	}
 }

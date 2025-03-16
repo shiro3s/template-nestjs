@@ -1,12 +1,19 @@
-import { Controller, Get } from "@nestjs/common";
-import {TodosService} from "./todos.service"
+import { Controller, Get, ParseIntPipe, Query, UsePipes, DefaultValuePipe, ParseBoolPipe, ValidationPipe } from "@nestjs/common";
+import { TodosService } from "./todos.service";
+import { FindTodosDto } from "./dto/todos.dto";
 
 @Controller("todos")
 export class TodosController {
-  constructor(private readonly todosService: TodosService) {}
+	constructor(private readonly todosService: TodosService) {}
 
-  @Get()
-  findAll(): Promise<string> {
-    return this.todosService.findAll();
-  }
+	@Get()
+	findAll(
+    @Query(
+      new ValidationPipe({
+        transform: true,
+      }),
+    ) todosDto: FindTodosDto
+  ) {
+		return this.todosService.findAll(todosDto);
+	}
 }
